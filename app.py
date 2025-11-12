@@ -83,37 +83,88 @@ def main():
     st.title("Investor Sentiment Tracker")
     st.markdown("Track media sentiment shifts over time")
 
+    # Show welcome message if no data exists
+    if "welcomed" not in st.session_state:
+        with st.expander("👋 Welcome - Click to get started", expanded=True):
+            st.markdown("""
+            ### Welcome to Investor Sentiment Tracker
+
+            This tool helps you monitor how media sentiment toward major tech stocks shifts over time,
+            giving you AI-powered insights for investor relations and media monitoring.
+
+            **How to use:**
+            1. **Select a company** from the sidebar (TSLA, NVDA, AAPL, GOOGL, or AMZN)
+            2. **Choose your date range** and source quality (Major Sources for premium outlets, All Sources for broader coverage)
+            3. **Click "Fetch New Articles"** to import and analyze articles with AI
+            4. **Explore the dashboard** with daily briefs, sentiment trends, and top topics
+            5. **Ask questions** using the AI chatbot to get insights from your data
+
+            **What you'll see:**
+            - **Daily IR Briefs**: AI-generated summaries with source links
+            - **Sentiment Trends**: Visual charts with 7-day moving averages
+            - **Article Volume**: Track media coverage intensity
+            - **Top Topics**: Identify emerging themes and narratives
+
+            **Cost & Performance:**
+            - Free tier compatible (NewsAPI + Streamlit Cloud)
+            - Claude 3.5 Haiku: ~$0.75/month for daily updates
+            - ~2 seconds per article for AI analysis
+
+            ---
+
+            **Technical Implementation**
+
+            Built by Nicolo Pastrone with Python and Streamlit for a responsive web interface.
+            Integrated Anthropic's Claude 3.5 Haiku API for cost-efficient sentiment analysis with custom prompt engineering.
+            Supabase handles authentication and PostgreSQL database storage with automatic deduplication.
+            NewsAPI provides real-time article feeds with configurable source filtering.
+            Developed collaboratively with Claude Code, demonstrating modern AI-assisted development workflows.
+
+            **Ready?** Choose a company from the sidebar and click "Fetch New Articles" to begin.
+            """)
+
+            if st.button("Got it, let's start!", type="primary", use_container_width=True):
+                st.session_state.welcomed = True
+                st.rerun()
+
     # ==================== SIDEBAR ====================
 
     with st.sidebar:
-        st.header("Settings")
+        st.header("⚙️ Settings")
+        st.caption("Configure your sentiment tracking preferences")
 
+        st.markdown("### Company")
         ticker = st.selectbox(
-            "Company Ticker",
+            "Select company to track",
             options=config.AVAILABLE_TICKERS,
             index=config.AVAILABLE_TICKERS.index(config.DEFAULT_TICKER) if config.DEFAULT_TICKER in config.AVAILABLE_TICKERS else 0,
-            key="ticker"
+            key="ticker",
+            label_visibility="collapsed"
         )
 
+        st.markdown("### Time Range")
         date_range_option = st.selectbox(
-            "Date Range",
+            "Select date range",
             options=list(config.DATE_RANGE_OPTIONS.keys()),
             index=0,
-            key="date_range_option"
+            key="date_range_option",
+            label_visibility="collapsed"
         )
 
+        st.markdown("### Source Quality")
         source_quality = st.radio(
-            "Source Quality",
+            "Select source quality",
             options=list(config.SOURCE_QUALITY_OPTIONS.keys()),
             index=1,  # Default to "Quantity (All Sources)"
-            key="source_quality"
+            key="source_quality",
+            label_visibility="collapsed"
         )
 
         # Show explanation
         if config.SOURCE_QUALITY_OPTIONS[source_quality] == "quality":
-            st.caption("Major US financial sources (WSJ, Bloomberg, Reuters, etc.)")
+            st.caption("✓ Major US financial sources (WSJ, Bloomberg, Reuters, etc.)")
         else:
-            st.caption("All available sources for broader coverage")
+            st.caption("✓ All available sources for broader coverage")
 
         # Show time estimate (varies by source quality)
         days = config.DATE_RANGE_OPTIONS[date_range_option]
@@ -131,11 +182,11 @@ def main():
         else:
             time_est_display = f"{int(round(estimated_time_sec / 60))} min"
 
-        st.caption(f"Estimated fetch time: ~{time_est_display} (~{int(estimated_articles)} articles expected)")
+        st.caption(f"⏱️ Est. time: ~{time_est_display} (~{int(estimated_articles)} articles)")
 
         st.divider()
 
-        if st.button("Fetch New Articles", use_container_width=True, type="primary"):
+        if st.button("📰 Fetch New Articles", use_container_width=True, type="primary"):
             # Dynamic status messages
             status_placeholder = st.empty()
             days = config.DATE_RANGE_OPTIONS[date_range_option]
@@ -218,8 +269,8 @@ def main():
 
     # ==================== Q&A CHATBOT ====================
 
-    st.subheader("Ask Questions About Sentiment")
-    st.markdown("Get AI-powered insights based on your imported articles")
+    st.subheader("💬 Ask Questions About Sentiment")
+    st.markdown("Get AI-powered insights from Claude based on your imported articles. Ask about trends, concerns, or specific topics.")
 
     if not daily_data:
         st.info("Fetch articles first to enable Q&A")
