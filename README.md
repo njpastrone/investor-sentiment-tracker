@@ -4,7 +4,7 @@
 
 A portfolio project by **Nicolo Pastrone** demonstrating modern AI-assisted development and full-stack web application skills.
 
-## 🎯 Overview
+## Overview
 
 Track how media sentiment toward major tech stocks (TSLA, NVDA, AAPL, GOOGL, AMZN) shifts over time. Get AI-generated insights, visualize trends, and ask questions about the data—all powered by Claude 3.5 Haiku for cost-efficient sentiment analysis.
 
@@ -17,7 +17,7 @@ Track how media sentiment toward major tech stocks (TSLA, NVDA, AAPL, GOOGL, AMZ
 - **Cost-Efficient**: ~$0.75/month for daily updates using Claude Haiku
 - **Persistent Storage**: Supabase PostgreSQL database with automatic deduplication
 
-## 🛠️ Technical Implementation
+## Technical Implementation
 
 **Built by Nicolo Pastrone** with:
 - **Frontend**: Python + Streamlit for responsive web interface
@@ -33,7 +33,7 @@ NewsAPI → ETL Pipeline → Claude 3.5 Haiku → Supabase PostgreSQL → Stream
                           (Sentiment Analysis)
 ```
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 
@@ -74,7 +74,7 @@ streamlit run app.py
 
 The app will open at `http://localhost:8501`
 
-## ☁️ Deploy to Streamlit Cloud (Free)
+## Deploy to Streamlit Cloud (Free)
 
 1. **Push to GitHub**:
 ```bash
@@ -96,7 +96,7 @@ git push -u origin main
 
 3. **Done!** Your app will be live at `https://your-app.streamlit.app`
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 investor-sentiment-tracker/
@@ -111,7 +111,7 @@ investor-sentiment-tracker/
 └── .env.example       # Environment variables template
 ```
 
-## 💰 Cost Breakdown
+## Cost Breakdown
 
 | Service | Plan | Cost |
 |---------|------|------|
@@ -122,7 +122,7 @@ investor-sentiment-tracker/
 
 *Based on daily tracking of 5 companies with ~3 articles/day each (~450 articles/month at ~$0.0017 per article)
 
-## 🎓 What I Learned
+## What I Learned
 
 This project demonstrates:
 - **AI Integration**: Custom prompt engineering for consistent sentiment scoring
@@ -132,7 +132,7 @@ This project demonstrates:
 - **UX Design**: Intuitive dashboard layout with real-time feedback
 - **AI-Assisted Development**: Built collaboratively with Claude Code
 
-## 🔮 Future Enhancements
+## Future Enhancements
 
 - [ ] Multi-company comparison view
 - [ ] Email alerts for sentiment shifts
@@ -141,11 +141,11 @@ This project demonstrates:
 - [ ] Social media sentiment (Twitter/Reddit)
 - [ ] Custom company ticker support
 
-## 📄 License
+## License
 
 MIT License - Feel free to use this project for learning or portfolio purposes.
 
-## 👤 About
+## About
 
 **Nicolo Pastrone** | [Portfolio](https://your-portfolio.com) | [LinkedIn](https://linkedin.com/in/yourprofile) | [GitHub](https://github.com/yourusername)
 

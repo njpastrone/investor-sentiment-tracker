@@ -85,7 +85,7 @@ def main():
 
     # Show welcome message if no data exists
     if "welcomed" not in st.session_state:
-        with st.expander("👋 Welcome - Click to get started", expanded=True):
+        with st.expander("Welcome - Click to get started", expanded=True):
             st.markdown("""
             ### Welcome to Investor Sentiment Tracker
 
@@ -130,10 +130,10 @@ def main():
     # ==================== SIDEBAR ====================
 
     with st.sidebar:
-        st.header("⚙️ Settings")
+        st.header("Settings")
         st.caption("Configure your sentiment tracking preferences")
 
-        st.markdown("### Company")
+        st.markdown("**Company**")
         ticker = st.selectbox(
             "Select company to track",
             options=config.AVAILABLE_TICKERS,
@@ -142,7 +142,7 @@ def main():
             label_visibility="collapsed"
         )
 
-        st.markdown("### Time Range")
+        st.markdown("**Time Range**")
         date_range_option = st.selectbox(
             "Select date range",
             options=list(config.DATE_RANGE_OPTIONS.keys()),
@@ -151,7 +151,7 @@ def main():
             label_visibility="collapsed"
         )
 
-        st.markdown("### Source Quality")
+        st.markdown("**Source Quality**")
         source_quality = st.radio(
             "Select source quality",
             options=list(config.SOURCE_QUALITY_OPTIONS.keys()),
@@ -162,9 +162,9 @@ def main():
 
         # Show explanation
         if config.SOURCE_QUALITY_OPTIONS[source_quality] == "quality":
-            st.caption("✓ Major US financial sources (WSJ, Bloomberg, Reuters, etc.)")
+            st.caption("Major US financial sources (WSJ, Bloomberg, Reuters, etc.)")
         else:
-            st.caption("✓ All available sources for broader coverage")
+            st.caption("All available sources for broader coverage")
 
         # Show time estimate (varies by source quality)
         days = config.DATE_RANGE_OPTIONS[date_range_option]
@@ -182,11 +182,11 @@ def main():
         else:
             time_est_display = f"{int(round(estimated_time_sec / 60))} min"
 
-        st.caption(f"⏱️ Est. time: ~{time_est_display} (~{int(estimated_articles)} articles)")
+        st.caption(f"Est. time: ~{time_est_display} (~{int(estimated_articles)} articles)")
 
         st.divider()
 
-        if st.button("📰 Fetch New Articles", use_container_width=True, type="primary"):
+        if st.button("Fetch New Articles", use_container_width=True, type="primary"):
             # Dynamic status messages
             status_placeholder = st.empty()
             days = config.DATE_RANGE_OPTIONS[date_range_option]
@@ -269,7 +269,7 @@ def main():
 
     # ==================== Q&A CHATBOT ====================
 
-    st.subheader("💬 Ask Questions About Sentiment")
+    st.subheader("Ask Questions About Sentiment")
     st.markdown("Get AI-powered insights from Claude based on your imported articles. Ask about trends, concerns, or specific topics.")
 
     if not daily_data:
