@@ -75,6 +75,11 @@ def render_trend_badge(trend: str) -> str:
 def main():
     """Main application logic."""
 
+    # Handle ping requests (for keep-alive)
+    if st.query_params.get("ping"):
+        st.write("pong")
+        st.stop()
+
     # Validate environment
     if not validate_environment():
         st.stop()
@@ -266,6 +271,16 @@ def main():
     start_date, end_date = get_date_range(date_range_option)
     db = get_db()
     daily_data = db.get_daily_agg_range(ticker, start_date, end_date)
+
+    # Show what's currently displayed
+    if daily_data:
+        dates = [d["date"] for d in daily_data]
+        oldest = min(dates)
+        newest = max(dates)
+        total_articles = sum(d["article_count"] for d in daily_data)
+        st.info(f"**Currently displaying:** {ticker} — {len(dates)} days ({oldest} to {newest}) — {total_articles} articles analyzed")
+    else:
+        st.info(f"**No data available** for {ticker} in selected date range — Click 'Fetch New Articles' to import data")
 
     # ==================== Q&A CHATBOT ====================
 
