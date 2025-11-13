@@ -16,7 +16,7 @@ from etl import run_pipeline
 # ==================== PAGE CONFIG ====================
 
 st.set_page_config(
-    page_title="Investor Sentiment Tracker",
+    page_title="Investor Sentiment Dashboard",
     page_icon="📊",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -85,14 +85,14 @@ def main():
         st.stop()
 
     # Header
-    st.title("Investor Sentiment Tracker")
-    st.markdown("Track media sentiment shifts over time")
+    st.title("Investor Sentiment Dashboard")
+    st.markdown("AI-powered media sentiment analysis for investor relations")
 
     # Show welcome message if no data exists
     if "welcomed" not in st.session_state:
         with st.expander("Welcome - Click to get started", expanded=True):
             st.markdown("""
-            ### Welcome to Investor Sentiment Tracker
+            ### Welcome to Investor Sentiment Dashboard
 
             This tool helps you monitor how media sentiment toward major tech stocks shifts over time,
             giving you AI-powered insights for investor relations and media monitoring.
