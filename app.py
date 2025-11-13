@@ -382,6 +382,12 @@ def main():
         # Navigation: Dropdown + Prev/Next buttons
         col_prev, col_dropdown, col_next = st.columns([1, 4, 1])
 
+        # Track current ticker and date range to reset when they change
+        current_context = f"{ticker}_{date_range_option}"
+        if "brief_context" not in st.session_state or st.session_state.brief_context != current_context:
+            st.session_state.brief_context = current_context
+            st.session_state.brief_date_idx = len(df) - 1
+
         # Initialize session state for selected index if not exists, or reset if out of bounds
         if "brief_date_idx" not in st.session_state or st.session_state.brief_date_idx >= len(df):
             st.session_state.brief_date_idx = len(df) - 1
