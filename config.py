@@ -44,8 +44,7 @@ MAX_ARTICLES_PER_REQUEST = int(os.getenv("MAX_ARTICLES_PER_REQUEST", "100"))
 # Date range options (days)
 DATE_RANGE_OPTIONS = {
     "Last 7 days": 7,
-    "Last 30 days": 30,
-    "Last 90 days": 90
+    "Last 30 days": 30
 }
 
 # Source quality options
