@@ -471,51 +471,7 @@ def main():
         )
 
     with col_right:
-        st.markdown("""
-        <style>
-        .tooltip {
-            position: relative;
-            display: inline-block;
-            cursor: help;
-            color: #888;
-            font-size: 0.8em;
-            margin-left: 5px;
-        }
-        .tooltip .tooltiptext {
-            visibility: hidden;
-            width: 280px;
-            background-color: #333;
-            color: #fff;
-            text-align: left;
-            border-radius: 6px;
-            padding: 10px;
-            position: absolute;
-            z-index: 1;
-            bottom: 125%;
-            left: 50%;
-            margin-left: -140px;
-            opacity: 0;
-            transition: opacity 0.3s;
-            font-size: 0.85em;
-            line-height: 1.4;
-        }
-        .tooltip:hover .tooltiptext {
-            visibility: visible;
-            opacity: 1;
-        }
-        </style>
-        <h4 style="display: inline;">Sentiment Trend</h4>
-        <span class="tooltip">ⓘ
-            <span class="tooltiptext">
-                <strong>Sentiment Score Explained</strong><br><br>
-                Scores range from -1.0 to +1.0:<br>
-                • Positive (≥0.25): Favorable coverage<br>
-                • Neutral (-0.25 to 0.25): Balanced reporting<br>
-                • Negative (≤-0.25): Critical coverage<br><br>
-                Calculated by Claude AI analyzing article content.
-            </span>
-        </span>
-        """, unsafe_allow_html=True)
+        st.subheader("Sentiment Trend")
 
         fig = go.Figure()
 
