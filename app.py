@@ -150,7 +150,7 @@ def main():
         source_quality = st.radio(
             "Select source quality",
             options=list(config.SOURCE_QUALITY_OPTIONS.keys()),
-            index=1,  # Default to "Quantity (All Sources)"
+            index=0,  # Default to "Quality (Major Sources)"
             key="source_quality",
             label_visibility="collapsed"
         )
