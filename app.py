@@ -471,19 +471,7 @@ def main():
         )
 
     with col_right:
-        st.subheader("Sentiment Trend")
-
-        with st.expander("ℹ️ How sentiment scores work", expanded=False):
-            st.markdown("""
-            **Sentiment Score Explained**
-
-            Scores range from -1.0 to +1.0:
-            - **Positive** (≥0.25): Favorable coverage
-            - **Neutral** (-0.25 to 0.25): Balanced reporting
-            - **Negative** (≤-0.25): Critical coverage
-
-            Calculated by Claude 3.5 Haiku analyzing article titles and content for tone, language, and context.
-            """)
+        st.markdown("#### Sentiment Trend <span title='Scores range from -1.0 (very negative) to +1.0 (very positive). Positive ≥0.25, Neutral -0.25 to 0.25, Negative ≤-0.25. Calculated by Claude AI analyzing article content.' style='cursor: help; color: #888; font-size: 0.8em;'>ⓘ</span>", unsafe_allow_html=True)
 
         fig = go.Figure()
 
