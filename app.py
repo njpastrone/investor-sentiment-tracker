@@ -471,22 +471,19 @@ def main():
         )
 
     with col_right:
-        col_title, col_help = st.columns([4, 1])
-        with col_title:
-            st.subheader("Sentiment Trend")
-        with col_help:
-            st.markdown("")  # Spacing
-            with st.popover("ℹ️"):
-                st.markdown("""
-                **Sentiment Score Explained**
+        st.subheader("Sentiment Trend")
 
-                Scores range from -1.0 to +1.0:
-                - **Positive** (≥0.25): Favorable coverage
-                - **Neutral** (-0.25 to 0.25): Balanced reporting
-                - **Negative** (≤-0.25): Critical coverage
+        with st.expander("ℹ️ How sentiment scores work", expanded=False):
+            st.markdown("""
+            **Sentiment Score Explained**
 
-                Calculated by Claude 3.5 Haiku analyzing article titles and content for tone, language, and context.
-                """)
+            Scores range from -1.0 to +1.0:
+            - **Positive** (≥0.25): Favorable coverage
+            - **Neutral** (-0.25 to 0.25): Balanced reporting
+            - **Negative** (≤-0.25): Critical coverage
+
+            Calculated by Claude 3.5 Haiku analyzing article titles and content for tone, language, and context.
+            """)
 
         fig = go.Figure()
 
