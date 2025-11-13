@@ -141,7 +141,7 @@ def main():
         date_range_option = st.selectbox(
             "Select date range",
             options=list(config.DATE_RANGE_OPTIONS.keys()),
-            index=0,
+            index=1,  # Default to "Last 30 days"
             key="date_range_option",
             label_visibility="collapsed"
         )
