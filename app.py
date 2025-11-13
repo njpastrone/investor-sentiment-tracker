@@ -115,16 +115,6 @@ def main():
             - Claude 3.5 Haiku: ~$0.75/month for daily updates
             - ~2 seconds per article for AI analysis
 
-            ---
-
-            **Technical Implementation**
-
-            Built by Nicolo Pastrone with Python and Streamlit for a responsive web interface.
-            Integrated Anthropic's Claude 3.5 Haiku API for cost-efficient sentiment analysis with custom prompt engineering.
-            Supabase handles authentication and PostgreSQL database storage with automatic deduplication.
-            NewsAPI provides real-time article feeds with configurable source filtering.
-            Developed collaboratively with Claude Code, demonstrating modern AI-assisted development workflows.
-
             **Ready?** Choose a company from the sidebar and click "Fetch New Articles" to begin.
             """)
 
@@ -311,8 +301,14 @@ def main():
             # Display answer
             st.markdown(
                 f"""
-                <div style="background-color: #f8fafc; padding: 20px; border-radius: 8px; border-left: 4px solid #3b82f6; margin-top: 12px; margin-bottom: 20px;">
-                    <p style="margin: 0; font-size: 1em; line-height: 1.7; color: #1e293b;">{result['answer']}</p>
+                <div style="background-color: var(--background-color);
+                            border: 1px solid var(--secondary-background-color);
+                            padding: 20px;
+                            border-radius: 8px;
+                            border-left: 4px solid #3b82f6;
+                            margin-top: 12px;
+                            margin-bottom: 20px;">
+                    <p style="margin: 0; font-size: 1em; line-height: 1.7; color: var(--text-color);">{result['answer']}</p>
                 </div>
                 """,
                 unsafe_allow_html=True
@@ -443,7 +439,7 @@ def main():
         # Build sources HTML
         sources_html = ""
         if daily_articles:
-            sources_html = '<div style="border-top: 1px solid #e2e8f0; padding-top: 12px; margin-top: 12px;"><p style="font-size: 0.85em; font-weight: 600; color: #475569; margin-bottom: 8px;">SOURCES:</p>'
+            sources_html = '<div style="border-top: 1px solid var(--secondary-background-color); padding-top: 12px; margin-top: 12px;"><p style="font-size: 0.85em; font-weight: 600; color: var(--text-color); opacity: 0.8; margin-bottom: 8px;">SOURCES:</p>'
 
             for article in daily_articles:
                 mention = article.get("mentions", [{}])[0] if article.get("mentions") else {}
@@ -458,10 +454,16 @@ def main():
         # Display brief card with fixed height including sources
         st.markdown(
             f"""
-            <div style="background-color: #f8fafc; padding: 20px; border-radius: 8px; border-left: 4px solid #3b82f6; height: {GRID_HEIGHT - 60}px; overflow-y: auto;">
-                <h4 style="margin-top: 0; color: #1e293b;">{selected_row['date'].strftime('%B %d, %Y')}</h4>
-                <p style="margin-bottom: 16px;">{render_sentiment_badge(selected_row['avg_sentiment'])} {render_trend_badge(selected_row['sentiment_trend'])} <span style="color: #64748b; font-size: 0.85em;">{selected_row['article_count']} articles</span></p>
-                <p style="font-size: 0.95em; line-height: 1.7; color: #334155; margin-bottom: 16px;">{selected_row['ir_brief']}</p>
+            <div style="background-color: var(--background-color);
+                        border: 1px solid var(--secondary-background-color);
+                        padding: 20px;
+                        border-radius: 8px;
+                        border-left: 4px solid #3b82f6;
+                        height: {GRID_HEIGHT - 60}px;
+                        overflow-y: auto;">
+                <h4 style="margin-top: 0; color: var(--text-color);">{selected_row['date'].strftime('%B %d, %Y')}</h4>
+                <p style="margin-bottom: 16px;">{render_sentiment_badge(selected_row['avg_sentiment'])} {render_trend_badge(selected_row['sentiment_trend'])} <span style="color: var(--text-color); opacity: 0.7; font-size: 0.85em;">{selected_row['article_count']} articles</span></p>
+                <p style="font-size: 0.95em; line-height: 1.7; color: var(--text-color); margin-bottom: 16px;">{selected_row['ir_brief']}</p>
                 {sources_html}
             </div>
             """,
@@ -523,13 +525,12 @@ def main():
                 x=1
             ),
             margin=dict(l=10, r=10, t=30, b=40),
-            plot_bgcolor="white",
-            paper_bgcolor="white",
+            template="plotly_white",
             font=dict(family="Inter, system-ui, sans-serif", size=12)
         )
 
-        fig.update_xaxes(showgrid=True, gridwidth=1, gridcolor="#e2e8f0")
-        fig.update_yaxes(showgrid=True, gridwidth=1, gridcolor="#e2e8f0")
+        fig.update_xaxes(showgrid=True, gridwidth=1, gridcolor="rgba(128, 128, 128, 0.2)")
+        fig.update_yaxes(showgrid=True, gridwidth=1, gridcolor="rgba(128, 128, 128, 0.2)")
 
         st.plotly_chart(fig, use_container_width=True)
 
@@ -556,13 +557,12 @@ def main():
             height=GRID_HEIGHT,
             showlegend=False,
             margin=dict(l=10, r=10, t=10, b=40),
-            plot_bgcolor="white",
-            paper_bgcolor="white",
+            template="plotly_white",
             font=dict(family="Inter, system-ui, sans-serif", size=12)
         )
 
-        fig2.update_xaxes(showgrid=True, gridwidth=1, gridcolor="#e2e8f0")
-        fig2.update_yaxes(showgrid=True, gridwidth=1, gridcolor="#e2e8f0")
+        fig2.update_xaxes(showgrid=True, gridwidth=1, gridcolor="rgba(128, 128, 128, 0.2)")
+        fig2.update_yaxes(showgrid=True, gridwidth=1, gridcolor="rgba(128, 128, 128, 0.2)")
 
         st.plotly_chart(fig2, use_container_width=True)
 
@@ -599,12 +599,11 @@ def main():
                 height=GRID_HEIGHT,
                 showlegend=False,
                 margin=dict(l=10, r=10, t=10, b=40),
-                plot_bgcolor="white",
-                paper_bgcolor="white",
+                template="plotly_white",
                 font=dict(family="Inter, system-ui, sans-serif", size=12)
             )
 
-            fig3.update_xaxes(showgrid=True, gridwidth=1, gridcolor="#e2e8f0")
+            fig3.update_xaxes(showgrid=True, gridwidth=1, gridcolor="rgba(128, 128, 128, 0.2)")
             fig3.update_yaxes(showgrid=False)
 
             st.plotly_chart(fig3, use_container_width=True)
@@ -650,6 +649,7 @@ def main():
 
     st.divider()
     st.caption("**Data Sources:** NewsAPI (newsapi.org) | **Sentiment Analysis:** Claude 3.5 Haiku by Anthropic")
+    st.caption("**Technical Implementation:** Built by Nicolo Pastrone with Python and Streamlit. Integrated Anthropic's Claude 3.5 Haiku API for cost-efficient sentiment analysis with custom prompt engineering. Supabase handles PostgreSQL database storage with automatic deduplication. NewsAPI provides real-time article feeds with configurable source filtering. Developed collaboratively with Claude Code, demonstrating modern AI-assisted development workflows.")
 
 
 # ==================== ENTRY POINT ====================
