@@ -268,9 +268,9 @@ def main():
         oldest = min(dates)
         newest = max(dates)
         total_articles = sum(d["article_count"] for d in daily_data)
-        st.info(f"**Currently displaying:** {ticker} — {len(dates)} days ({oldest} to {newest}) — {total_articles} articles analyzed")
+        st.info(f"**Currently displaying:** {ticker} — {len(dates)} days ({oldest} to {newest}) — {total_articles} articles analyzed. Use sidebar to fetch more articles or change date range.")
     else:
-        st.info(f"**No data available** for {ticker} in selected date range — Click 'Fetch New Articles' to import data")
+        st.info(f"**No data available** for {ticker} in selected date range — Click 'Fetch New Articles' in the sidebar to import data")
 
     # ==================== Q&A CHATBOT ====================
 
